@@ -1452,8 +1452,8 @@ kbd {
 .post-meta-item--updatetime {
   color: #49b1f5;
 }
-.post-meta-item--visitors {
-  color: #fc6423;
+.post-meta-item--wordcount {
+  color: var(--color-gray-700);
 }
 .post-ending {
   margin-bottom: 1rem;
@@ -2366,6 +2366,18 @@ kbd {
 .friends-plugin__item-info__intro {
   font-size: 0.9em;
   color: #999;
+}
+.busuanzi-siteuv__icon,
+.busuanzi-sitepv__icon,
+.busuanzi-siteuv__info,
+.busuanzi-sitepv__info,
+.busuanzi-siteuv__value,
+.busuanzi-sitepv__value {
+  margin: 0 2px;
+}
+.busuanzi > span:nth-child(2)::before {
+  content: '|';
+  margin: 0 10px;
 }
 @media (min-width: 1138px) {
   .header-nav-inner {
