@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="每一片雪花都是独一无二的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探雪花算法">
+<meta property="og:url" content="https://supebam.github.io/2022/04/02/%E5%88%9D%E6%8E%A2%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="supeBam&#96;Blog">
+<meta property="og:description" content="每一片雪花都是独一无二的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/snowflake-id-64bit.png">
+<meta property="article:published_time" content="2022-04-02T07:59:42.000Z">
+<meta property="article:modified_time" content="2022-04-02T08:46:46.124Z">
+<meta property="article:author" content="supeBam">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://supebam.github.io/assets/photo/snowflake-id-64bit.png"><title>初探雪花算法 | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/04/02/%E5%88%9D%E6%8E%A2%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">初探雪花算法</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-02</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-02</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">587</span></span></div></header><div class="post-body"><p><strong>每一片雪花都是独一无二的</strong></p>
+<span id="more"></span>
+
+<p>德国哲学家、数学家莱布尼茨说过一句话：“There are no two identical leaves in the world.”</p>
+<br>
+
+
+        <h3 id="什么雪花"   >
+          <a href="#什么雪花" class="heading-link"><i class="fas fa-link"></i></a><a href="#什么雪花" class="headerlink" title="什么雪花"></a>什么雪花</h3>
+      <p><strong>SnowFlake 算法，是 Twitter 开源的分布式id 生成算法。其核心思想就是：使用一个 64 bit 的 long 型的数字作为全局唯一 id。在分布式系统中的应用十分广泛，且ID 引入了时间戳，基本上保持自增的</strong></p>
+<br>
+
+
+        <h3 id="分布式ID生成规则"   >
+          <a href="#分布式ID生成规则" class="heading-link"><i class="fas fa-link"></i></a><a href="#分布式ID生成规则" class="headerlink" title="分布式ID生成规则"></a>分布式ID生成规则</h3>
+      <ul>
+<li>全局唯一</li>
+<li>趋势递增  (mysql的innoDB采用聚集索引，保证数据库写入性能)</li>
+<li>单调递增</li>
+<li>信息安全  (无规则的)</li>
+<li>含时间戳</li>
+</ul>
+<br>
+
+
+        <h3 id="雪花原理"   >
+          <a href="#雪花原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#雪花原理" class="headerlink" title="雪花原理"></a>雪花原理</h3>
+      <p>Snowflake ID组成结构：正数位（1字节）+ 时间戳（41 字节）+ 机器ID（5 字节）+ 数据中心（5 字节）+ 自增值（12 字节），总共64 字节组成的一个Long类型。</p>
+<p><img src="/../assets/photo/snowflake-id-64bit.png" alt="img"></p>
+<p>在Java中Snowflake生成的是Long类型的ID，一个Long类型占8个字节，每个字节占8 字节 ，也就是说一个Long类型占64个 字节 。而.NET中Long类型是System.Int64的一个实例。</p>
+<p>第一个bit位（1bit）：Java中long的最高位是符号位代表正负，正数是0，负数是1，一般生成ID都为正数，所以默认为0。<br><strong>时间戳部分（41bit）</strong>：毫秒级的时间，不建议存当前时间戳，而是用（当前时间戳 – 固定开始时间戳）的差值，可以使产生的ID从更小的值开始；41位的时间戳可以使用69年，(1L &lt;&lt; 41) &#x2F; (1000L * 60 * 60 * 24 * 365) &#x3D; 69年<br><strong>工作机器id（10bit）：也被叫做workId</strong>，这个可以灵活配置，机房或者机器号组合都可以。<br><strong>序列号部分（12bit）</strong>，自增值支持同一毫秒内同一个节点可以生成4096个ID<br>根据这个算法的逻辑，只需要将这个算法用Java&#x2F;.NET语言实现出来，封装为一个工具方法，那么各个业务应用可以直接使用该工具方法来获取分布式ID，只需保证每个业务应用有自己的工作机器id即可，而不需要单独去搭建一个获取分布式ID的应用。</p>
+<br>
+
+
+        <h3 id="参考文章"   >
+          <a href="#参考文章" class="heading-link"><i class="fas fa-link"></i></a><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3>
+      <ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cuiwenyuan.com/shanghai/post/snowflake-algorithm-there-are-no-two-identical-leaves-in-the-world.html" >https://www.cuiwenyuan.com/shanghai/post/snowflake-algorithm-there-are-no-two-identical-leaves-in-the-world.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43303455/article/details/118738658" >https://blog.csdn.net/weixin_43303455/article/details/118738658</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43664418/article/details/106254772" >https://blog.csdn.net/weixin_43664418/article/details/106254772</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/04/02/%E5%88%9D%E6%8E%A2%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/">https://supebam.github.io/2022/04/02/%E5%88%9D%E6%8E%A2%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E5%93%A6/"><span class="paginator-prev__text">每日一题哦</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E9%9B%AA%E8%8A%B1"><span class="toc-number">1.</span> <span class="toc-text">
+          什么雪花</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8FID%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">
+          分布式ID生成规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%AA%E8%8A%B1%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">
+          雪花原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">
+          参考文章</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/touxiang.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">“不管什么问题，都必然存在着答案”</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>supeBam</span></div><div class="busuanzi"></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
