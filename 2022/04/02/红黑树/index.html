@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="概念模型       概念模型：2-3-4树的一种实现                     2-3-4树模型        2-3-4 树在计算机科学中是阶为 4 的B树。 大体同B树，2-3-4 树是可以用做字典的一种自平衡数据结构。它可以在O(log n)时间内查找、插入和删除，这里的 n 是树中元素的数目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树">
+<meta property="og:url" content="https://supebam.github.io/2022/04/02/%E7%BA%A2%E9%BB%91%E6%A0%91/index.html">
+<meta property="og:site_name" content="supeBam&#96;Blog">
+<meta property="og:description" content="概念模型       概念模型：2-3-4树的一种实现                     2-3-4树模型        2-3-4 树在计算机科学中是阶为 4 的B树。 大体同B树，2-3-4 树是可以用做字典的一种自平衡数据结构。它可以在O(log n)时间内查找、插入和删除，这里的 n 是树中元素的数目。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220402123024356.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E8%BD%AC%E6%8D%A2.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220402123811466.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220402125536589.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220402125810242.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B92.jpg">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220402133357832.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/%E5%B7%A6%E5%80%BE%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="article:published_time" content="2022-04-02T02:08:01.000Z">
+<meta property="article:modified_time" content="2022-04-02T05:45:43.026Z">
+<meta property="article:author" content="supeBam">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="红黑树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://supebam.github.io/assets/photo/image-20220402123024356.png"><title>红黑树 | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/04/02/%E7%BA%A2%E9%BB%91%E6%A0%91/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">红黑树</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-02</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-02</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1k</span></span></div></header><div class="post-body">
+        <h3 id="概念模型"   >
+          <a href="#概念模型" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念模型" class="headerlink" title="概念模型"></a>概念模型</h3>
+      <p><strong>概念模型：2-3-4树的一种实现</strong></p>
+
+        <h3 id="2-3-4树模型"   >
+          <a href="#2-3-4树模型" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-3-4树模型" class="headerlink" title="2-3-4树模型"></a>2-3-4树模型</h3>
+      <blockquote>
+<p><strong>2-3-4 树</strong>在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" >计算机科学</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>中是阶为 4 的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/B%E6%A0%91" >B树</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
+<p>大体同<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/B%E6%A0%91" >B树</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，2-3-4 树是可以用做<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E5%85%B8_(%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B)" >字典</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>的一种自平衡<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" >数据结构</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。它可以在O(log n)时间内查找、插入和删除，这里的 <em>n</em> 是树中元素的数目。</p>
+</blockquote>
+<p><img src="/../assets/photo/image-20220402123024356.png" alt="image-20220402123024356"></p>
+<span id="more"></span>
+
+<ul>
+<li>2-节点：包含了1个元素和2个儿子节点</li>
+<li>3-节点：包含了2个元素和3个儿子节点</li>
+<li>4-节点：包含了3个元素和4个儿子节点</li>
+</ul>
+<p><strong>因为编程中难以表示，所以用红黑树来等同该数据结构</strong></p>
+
+        <h3 id="2-3-4树到红黑树的转换"   >
+          <a href="#2-3-4树到红黑树的转换" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-3-4树到红黑树的转换" class="headerlink" title="2-3-4树到红黑树的转换"></a>2-3-4树到红黑树的转换</h3>
+      <p>红黑树引入了颜色的概念，2-3-4树中的2节点在红黑树中表示黑节点，非2节点表示为红节点。当黑色作为父节点连接红节点时，可以把他们拉到同一水平线上，这样他们就如同在2-3-4树中的非2节点了。</p>
+<p>转换有两种方式：一种是红节点只会出现在左子树中，另一种是只出现在右子树中。他们分别被称为<strong>左倾红黑树</strong>和<strong>右倾红黑树</strong></p>
+<p>下图为左倾红黑树到2-3-4树的转换</p>
+<p><img src="/../assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E8%BD%AC%E6%8D%A2.png" alt="image-红黑树转换"></p>
+
+        <h3 id="红黑树例图"   >
+          <a href="#红黑树例图" class="heading-link"><i class="fas fa-link"></i></a><a href="#红黑树例图" class="headerlink" title="红黑树例图"></a>红黑树例图</h3>
+      <p><img src="/../assets/photo/image-20220402123811466.png" alt="image-20220402123811466"></p>
+
+        <h3 id="特性"   >
+          <a href="#特性" class="heading-link"><i class="fas fa-link"></i></a><a href="#特性" class="headerlink" title="特性"></a><strong>特性</strong></h3>
+      <p><strong>（1）每个节点或者是黑色，或者是红色。</strong><br><strong>（2）根节点是黑色。</strong><br><strong>（3）每个叶子节点（NIL）是黑色。 [注意：这里叶子节点，是指为空(NIL或NULL)的叶子节点！</strong><br><strong>（4）如果一个节点是红色的，则它的子节点必须是黑色的。</strong><br><strong>（5）从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。</strong></p>
+
+        <h3 id="优势和用途"   >
+          <a href="#优势和用途" class="heading-link"><i class="fas fa-link"></i></a><a href="#优势和用途" class="headerlink" title="优势和用途"></a>优势和用途</h3>
+      <p>二叉查找树在不断的增加和删除后，它可能会形成只有左子树或只有右子树的查找树，这时候他的查找效率降低到O(n)</p>
+<p><img src="/../assets/photo/image-20220402125536589.png" alt="image-20220402125536589"></p>
+<p><strong>而红黑树由于在插入和删除结点时都会进行变色旋转等操作，在符合红黑树条件的情况下，即使一边子树全是黑色结点，另一边子树全是红黑相间，两子树的高度差也不会超过一半。一棵有 n 个结点的红黑树高度至多为 2log(n+1)，查找效率最坏为 O(log(n))。</strong></p>
+
+        <h3 id="插入"   >
+          <a href="#插入" class="heading-link"><i class="fas fa-link"></i></a><a href="#插入" class="headerlink" title="插入"></a>插入</h3>
+      <p><img src="/../assets/photo/image-20220402125810242.png" alt="image-20220402125810242"></p>
+<p>第一种情况：当插入的父节点为黑节点，则可以直接插入</p>
+<p>第二种情况：当插入的父节点为红节点，因为红黑树特性，不能有连续的红节点，所以需要对自身进行左旋或右旋来保持平衡，并进行染色来维持红黑树</p>
+<p>第三种情况：当插入的父节点已经是一个4节点了，所以需要进行提升，把12染成红色，再插入14，这样13,14就形成了3节点</p>
+
+        <h3 id="删除"   >
+          <a href="#删除" class="heading-link"><i class="fas fa-link"></i></a><a href="#删除" class="headerlink" title="删除"></a>删除</h3>
+      <p>删除节点有两种方案:</p>
+<ul>
+<li><strong>第一种方案，先删除这个2节点，然后对树进行平衡调整。</strong></li>
+<li><strong>第二种方案，我们想办法让这个被删除的元素不可能出现在2节点中。</strong></li>
+</ul>
+
+        <h4 id="示例图1："   >
+          <a href="#示例图1：" class="heading-link"><i class="fas fa-link"></i></a><a href="#示例图1：" class="headerlink" title="示例图1："></a>示例图1：</h4>
+      <p><img src="/../assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg" alt="红黑树删除节点"></p>
+
+        <h4 id="示例图2："   >
+          <a href="#示例图2：" class="heading-link"><i class="fas fa-link"></i></a><a href="#示例图2：" class="headerlink" title="示例图2："></a>示例图2：<img src="/../assets/photo/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B92.jpg" alt="红黑树删除节点2"></h4>
+      
+        <h3 id="旋转"   >
+          <a href="#旋转" class="heading-link"><i class="fas fa-link"></i></a><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3>
+      
+        <h4 id="左倾红黑树插入示例"   >
+          <a href="#左倾红黑树插入示例" class="heading-link"><i class="fas fa-link"></i></a><a href="#左倾红黑树插入示例" class="headerlink" title="左倾红黑树插入示例"></a>左倾红黑树插入示例</h4>
+      <p><img src="/../assets/photo/image-20220402133357832.png" alt="image-20220402133357832"></p>
+<p><strong>黑色为黑节点，红色为红节点，黄色为插入节点</strong></p>
+<p><strong>插入节点插入后为红节点</strong></p>
+<p>插入会出现三种情况:</p>
+<ul>
+<li>第一种情况插入后15的左右节点都为红色，他们构成了一个2-3-4树中的4节点，若以2-3树的处理来看，则会将12，18染黑，15染红</li>
+<li>第二种情况如图2，则把11，12，15整体右旋，12和15交换颜色，然后出现第一种情况，并用相对应的方法处理</li>
+<li>第三种情况则先把12，14整体左旋，就会出翔第二种情况，再用相对应方式处理</li>
+</ul>
+
+        <h4 id="左倾红黑树删除示例"   >
+          <a href="#左倾红黑树删除示例" class="heading-link"><i class="fas fa-link"></i></a><a href="#左倾红黑树删除示例" class="headerlink" title="左倾红黑树删除示例"></a>左倾红黑树删除示例</h4>
+      <p><img src="/../assets/photo/%E5%B7%A6%E5%80%BE%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E7%A4%BA%E4%BE%8B.jpg" alt="左倾红黑树删除示例"></p>
+
+        <h3 id="本文参考链接"   >
+          <a href="#本文参考链接" class="heading-link"><i class="fas fa-link"></i></a><a href="#本文参考链接" class="headerlink" title="本文参考链接"></a>本文参考链接</h3>
+      <p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/273829162" >https://zhuanlan.zhihu.com/p/273829162</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269069974" >https://zhuanlan.zhihu.com/p/269069974</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/04/02/%E7%BA%A2%E9%BB%91%E6%A0%91/">https://supebam.github.io/2022/04/02/%E7%BA%A2%E9%BB%91%E6%A0%91/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/">红黑树</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/04/02/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E5%93%A6/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">每日一题哦</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/01/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"><span class="paginator-prev__text">滑动窗口</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          概念模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4%E6%A0%91%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">
+          2-3-4树模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4%E6%A0%91%E5%88%B0%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.</span> <span class="toc-text">
+          2-3-4树到红黑树的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E4%BE%8B%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">
+          红黑树例图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">
+          特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF%E5%92%8C%E7%94%A8%E9%80%94"><span class="toc-number">6.</span> <span class="toc-text">
+          优势和用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">
+          插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">8.</span> <span class="toc-text">
+          删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE1%EF%BC%9A"><span class="toc-number">8.1.</span> <span class="toc-text">
+          示例图1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%9B%BE2%EF%BC%9A"><span class="toc-number">8.2.</span> <span class="toc-text">
+          示例图2：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC"><span class="toc-number">9.</span> <span class="toc-text">
+          旋转</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E5%80%BE%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5%E7%A4%BA%E4%BE%8B"><span class="toc-number">9.1.</span> <span class="toc-text">
+          左倾红黑树插入示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E5%80%BE%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%E7%A4%BA%E4%BE%8B"><span class="toc-number">9.2.</span> <span class="toc-text">
+          左倾红黑树删除示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">10.</span> <span class="toc-text">
+          本文参考链接</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/touxiang.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">“不管什么问题，都必然存在着答案”</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">7</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>supeBam</span></div><div class="busuanzi"></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
