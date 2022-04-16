@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="title: 初识数据结构与算法date: 2022-04-16 11:30:30tags:  数据结构与算法categories: 数据结构与算法  梦总是突然醒的,就像泡沫一般,越吹越大,最后啪地破灭,什么也没有,除了空虚。没有脚踏实地的建立起来的东西,就无法形成精神和物质上的支撑">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="数据结构与算法                           算法分析                           时间复杂度分析       测试  随着输入规模的增大，算法的常数操作可以忽略不计 随着输入规模的增大，与最高次项相乘的常数可以忽略不计 最高次项的指数大的，随着n的增长，结果也会变得增长特别快 算法函数中n最高次幂越小，算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="supeBam&#96;Blog">
+<meta property="og:title" content="初识数据结构与算法">
 <meta property="og:url" content="https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="supeBam&#96;Blog">
-<meta property="og:description" content="title: 初识数据结构与算法date: 2022-04-16 11:30:30tags:  数据结构与算法categories: 数据结构与算法  梦总是突然醒的,就像泡沫一般,越吹越大,最后啪地破灭,什么也没有,除了空虚。没有脚踏实地的建立起来的东西,就无法形成精神和物质上的支撑">
+<meta property="og:description" content="数据结构与算法                           算法分析                           时间复杂度分析       测试  随着输入规模的增大，算法的常数操作可以忽略不计 随着输入规模的增大，与最高次项相乘的常数可以忽略不计 最高次项的指数大的，随着n的增长，结果也会变得增长特别快 算法函数中n最高次幂越小，算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210607161920925-1623205282384.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210607164814276.png">
@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615114230903.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615114242437.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615114300534.png">
-<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20210615133925140.png">
+<meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615133925140.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615134024394.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210616105720048.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210616105810777.png">
@@ -114,11 +114,12 @@
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210616223228604.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210616223300214.png">
 <meta property="og:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210616223322694.png">
-<meta property="article:published_time" content="2022-04-16T03:30:30.705Z">
-<meta property="article:modified_time" content="2022-04-16T04:19:34.661Z">
+<meta property="article:published_time" content="2022-04-16T04:22:57.000Z">
+<meta property="article:modified_time" content="2022-04-16T04:42:14.830Z">
 <meta property="article:author" content="supeBam">
+<meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210607161920925-1623205282384.png"><title>[ 文章无标题 ] | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://supebam.github.io/assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210607161920925-1623205282384.png"><title>初识数据结构与算法 | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
@@ -142,13 +143,7 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">[ 文章无标题 ]</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-16</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-16</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">14.8k</span></span></div></header><div class="post-body"><p>title: 初识数据结构与算法<br>date: 2022-04-16 11:30:30<br>tags:</p>
-<ul>
-<li>数据结构与算法<br>categories:</li>
-<li>数据结构与算法</li>
-</ul>
-<p>梦总是突然醒的,就像泡沫一般,越吹越大,最后啪地破灭,什么也没有,除了空虚。没有脚踏实地的建立起来的东西,就无法形成精神和物质上的支撑</p>
-<span id="more"></span>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">初识数据结构与算法</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-16</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-16</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">14.7k</span></span></div></header><div class="post-body"><span id="more"></span>
 
 
         <h2 id="数据结构与算法"   >
@@ -159,21 +154,25 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
       
         <h3 id="时间复杂度分析"   >
           <a href="#时间复杂度分析" class="heading-link"><i class="fas fa-link"></i></a><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3>
-      <p>测试</p>
-<p><strong>随着输入规模的增大，算法的常数操作可以忽略不计</strong></p>
-<p><strong>随着输入规模的增大，与最高次项相乘的常数可以忽略不计</strong></p>
-<p><strong>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</strong></p>
-<p><strong>算法函数中n最高次幂越小，算法效率越高</strong></p>
-<p>结论</p>
+      <p><strong>测试</strong></p>
+<blockquote>
+<p>随着输入规模的增大，算法的常数操作可以忽略不计</p>
+<p>随着输入规模的增大，与最高次项相乘的常数可以忽略不计</p>
+<p>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</p>
+<p>算法函数中n最高次幂越小，算法效率越高</p>
+</blockquote>
+<p><strong>结论</strong></p>
+<blockquote>
 <ol>
 <li>算法函数中的常数可以忽略</li>
 <li>算法函数中最高次幂的常数因子可以忽略</li>
 <li>算法函数中最高次幂越小，算法效率越高</li>
 </ol>
+</blockquote>
 
         <h4 id="大O记法"   >
           <a href="#大O记法" class="heading-link"><i class="fas fa-link"></i></a><a href="#大O记法" class="headerlink" title="大O记法"></a>大O记法</h4>
-      <p>记作：T(n) &#x3D; O(f(n))</p>
+      <p>记作：<strong>T(n) &#x3D; O(f(n))</strong></p>
 <p>明确事情：<strong>执行次数&#x3D;执行时间</strong></p>
 <p>用大写O()来体现算法时间复杂度的记法，我们称之为大O记法。一般情况下，随着输入规模n的增大，T(n)增长最慢的算法为最优算法</p>
 <p>推导大O阶的表示法有以下几个规则可以使用:</p>
@@ -284,6 +283,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
         <h4 id="1-1-顺序表"   >
           <a href="#1-1-顺序表" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-1-顺序表" class="headerlink" title="1.1 顺序表"></a>1.1 顺序表</h4>
       <p>​        顺序表是在计算机内存中以数组的形式保存的线性表，线性表的顺序存储是指用一组地址连续的存储单元，依次存储线性表中的各个元素、使得线性表中再逻辑结构上响铃的数据元素存储在相邻的物理存储单元中，即通过数据元素物理存储的相邻关系来反映数据元素之间逻辑上的相邻关系。</p>
+<br>
+
 
         <h4 id="1-2-链表"   >
           <a href="#1-2-链表" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-2-链表" class="headerlink" title="1.2 链表"></a>1.2 链表</h4>
@@ -326,6 +327,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
 <li>环形链表</li>
 <li>递归</li>
 </ol>
+<br>
+
 
         <h4 id="1-3-栈"   >
           <a href="#1-3-栈" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-3-栈" class="headerlink" title="1.3 栈"></a>1.3 栈</h4>
@@ -345,6 +348,8 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
 <p><strong>逆波兰表达式(后缀表达式)：</strong></p>
 <p>​        逆波兰表达式是波兰逻辑学家J·卢卡西维兹(J·Lukasewicz)于1929年首先提出的一种表达式的表示方法，后缀表达式的特点︰运算符总是放在跟它相关的操作数之后。</p>
 <p>​    <img src="/../assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210610154740683.png" alt="image-20210610154740683"></p>
+<br>
+
 
         <h4 id="1-4-队列"   >
           <a href="#1-4-队列" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-4-队列" class="headerlink" title="1.4 队列"></a>1.4 队列</h4>
@@ -679,8 +684,6 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
 <p>​    2.B+树的叶子结点都是相连的，因此对整棵树的遍历只需要一次线性遍历叶子结点即可。而且由于数据顺序<br>排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历。</p>
 <p><strong>B树的优点在于：</strong><br>        由于B树的每一个节点都包含key和value，因此我们根据key查找value时，只需要找到key所在的位置，就能找到value，</p>
 <p>​        但B+树只有叶子结点存储数据，索引每一次查找，都必须一次一次，一直找到树的最大深度处，也就是叶子结点的深度，才能找到value。</p>
-<br>
-
 
         <h3 id="并查集"   >
           <a href="#并查集" class="heading-link"><i class="fas fa-link"></i></a><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3>
@@ -725,8 +728,6 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
 <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	总共有<span class="number">20</span>个城市，目前已经修改好了<span class="number">7</span>条道路，问还需要修建多少条道路，才能让这<span class="number">20</span>个城市之间全部相通？</span><br><span class="line">	解题思路：</span><br><span class="line"><span class="number">1.</span>创建一个并查集UF_Tree_Weighted(<span class="number">20</span>);</span><br><span class="line"><span class="number">2.</span>分别调用union(<span class="number">0</span>,<span class="number">1</span>),union(<span class="number">6</span>,<span class="number">9</span>),union(<span class="number">3</span>,<span class="number">8</span>),union(<span class="number">5</span>,<span class="number">11</span>),union(<span class="number">2</span>,<span class="number">12</span>),union(<span class="number">6</span>,<span class="number">10</span>),union(<span class="number">4</span>,<span class="number">8</span>)，表示已经修建好的</span><br><span class="line">道路把对应的城市连接起来；</span><br><span class="line"><span class="number">3.</span>如果城市全部连接起来，那么并查集中剩余的分组数目为<span class="number">1</span>，所有的城市都在一个树中，所以，只需要获取当前</span><br><span class="line">并查集中剩余的数目，减去<span class="number">1</span>，就是还需要修建的道路数目；</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
 
 
-
-<br>
 
 
         <h3 id="图"   >
@@ -917,7 +918,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
         <h6 id="Prim算法的实现原理"   >
           <a href="#Prim算法的实现原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#Prim算法的实现原理" class="headerlink" title="Prim算法的实现原理"></a>Prim算法的实现原理</h6>
       <p>Prim算法始终将图中的顶点切分成两个集合，最小生成树顶点和非最小生成树顶点，通过不断的重复做某些操作，可以逐渐将非最小生成树中的顶点加入到最小生成树中，直到所有的顶点都加入到最小生成树中。<br>我们在设计API的时候，使用最小索引优先队列存放树中顶点与非树中顶点的有效横切边，那么它是如何表示的<br>呢？我们可以让最小索引优先队列的索引值表示图的顶点，让最小索引优先队列中的值表示从其他某个顶点到当前顶点的边权重。</p>
-<p><img src="/../assets/photo/image-20210615133925140.png" alt="image-20210615133925140"></p>
+<p><img src="/../assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615133925140.png" alt="image-20210615133925140"></p>
 <p>​        初始化状态，先默认0是最小生成树中的唯一顶点，其他的顶点都不在最小生成树中，此时横切边就是顶点0的邻接表中0-2,0-4,0-6,0-7这四条边，我们只需要将索引优先队列的2、4、6、7索引处分别存储这些边的权重值就可以表示了。<br>​        现在只需要从这四条横切边中找出权重最小的边，然后把对应的顶点加进来即可。所以找到0-7这条横切边的权重<br>最小，因此把0-7这条边添加进来，此时0和7属于最小生成树的顶点，其他的不属于，现在顶点7的邻接表中的边也成为了横切边，这时需要做两个操作：<br> 1、0-7这条边已经不是横切边了，需要让它失效：只需要调用最小索引优先队列的delMin()方法即可完成；<br> 2、2和4顶点各有两条连接指向最小生成树，需要只保留一条：4-7的权重小于0-4的权重，所以保留4-7，调用索引优先队列的change(4,0.37)即可，0-2的权重小于2-7的权重，所以保留0-2，不需要做额外操作。</p>
 <p><img src="/../assets/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/image-20210615134024394.png" alt="image-20210615134024394"></p>
 <p>​    </p>
@@ -965,7 +966,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></he
         <h5 id="Dijstra算法实现"   >
           <a href="#Dijstra算法实现" class="heading-link"><i class="fas fa-link"></i></a><a href="#Dijstra算法实现" class="headerlink" title="Dijstra算法实现"></a>Dijstra算法实现</h5>
       <p>​        Disjstra算法的实现和Prim算法很类似，构造最短路径树的每一步都是向这棵树中添加一条新的边，而这条新的边 是有效横切边pq队列中的权重最小的边。</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"><span class="paginator-prev__text">排序算法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">https://supebam.github.io/2022/04/16/%E5%88%9D%E8%AF%86%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"><span class="paginator-prev__text">排序算法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">
           数据结构与算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">
           算法分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">
           时间复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7O%E8%AE%B0%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">
