@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="介绍        广度优先搜索算法（英语：Breadth-First Search，缩写为BFS），又译作宽度优先搜索，或横向优先搜索，是一种图形搜索算法。简单的说，BFS是从根节点开始，沿着树的宽度遍历树的节点。如果所有节点均被访问，则算法中止。广度优先搜索的实现一般采用open-closed表。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广度优先搜索">
+<meta property="og:url" content="https://supebam.github.io/2022/04/21/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/index.html">
+<meta property="og:site_name" content="supeBam&#96;Blog">
+<meta property="og:description" content="介绍        广度优先搜索算法（英语：Breadth-First Search，缩写为BFS），又译作宽度优先搜索，或横向优先搜索，是一种图形搜索算法。简单的说，BFS是从根节点开始，沿着树的宽度遍历树的节点。如果所有节点均被访问，则算法中止。广度优先搜索的实现一般采用open-closed表。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220421150608573.png">
+<meta property="og:image" content="https://supebam.github.io/assets/photo/image-20220421150500067.png">
+<meta property="article:published_time" content="2022-04-21T06:54:23.000Z">
+<meta property="article:modified_time" content="2022-04-21T07:42:56.230Z">
+<meta property="article:author" content="supeBam">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://supebam.github.io/assets/photo/image-20220421150608573.png"><title>广度优先搜索 | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/04/21/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">广度优先搜索</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-04-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-04-21</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">671</span></span></div></header><div class="post-body">
+        <h3 id="介绍"   >
+          <a href="#介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3>
+      <blockquote>
+<p><strong>广度优先搜索算法</strong>（英语：Breadth-First Search，缩写为BFS），又译作<strong>宽度优先搜索</strong>，或<strong>横向优先搜索</strong>，是一种<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95" >图形搜索算法</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。简单的说，BFS是从根节点开始，沿着树的宽度遍历树的节点。如果所有节点均被访问，则算法中止。广度优先搜索的实现一般采用open-closed表。</p>
+</blockquote>
+<span id="more"></span>
+
+<br>
+
+
+        <h3 id="作用"   >
+          <a href="#作用" class="heading-link"><i class="fas fa-link"></i></a><a href="#作用" class="headerlink" title="作用"></a>作用</h3>
+      <p><strong>广度优先搜索是一种用于图的搜索算法</strong>，可以回答以下问题</p>
+<ul>
+<li>从节点A能否到达节点B</li>
+<li>从节点A到达节点B的最短路径</li>
+</ul>
+<p>下图有例子    </p>
+
+        <h3 id="例子"   >
+          <a href="#例子" class="heading-link"><i class="fas fa-link"></i></a><a href="#例子" class="headerlink" title="例子"></a>例子</h3>
+      
+        <h4 id="问题一例图"   >
+          <a href="#问题一例图" class="heading-link"><i class="fas fa-link"></i></a><a href="#问题一例图" class="headerlink" title="问题一例图"></a>问题一例图</h4>
+      <p>有无双子峰到达金门大桥的路径</p>
+<p><img src="/../assets/photo/image-20220421150608573.png" alt="image-20220421150608573"></p>
+
+        <h4 id="问题二例图"   >
+          <a href="#问题二例图" class="heading-link"><i class="fas fa-link"></i></a><a href="#问题二例图" class="headerlink" title="问题二例图"></a>问题二例图</h4>
+      <p>关系网中是哪个苹果分销商跟你的关系最近</p>
+<p><img src="/../assets/photo/image-20220421150500067.png" alt="image-20220421150500067"></p>
+<br>
+
+
+        <h3 id="问题思路"   >
+          <a href="#问题思路" class="heading-link"><i class="fas fa-link"></i></a><a href="#问题思路" class="headerlink" title="问题思路"></a>问题思路</h3>
+      <blockquote>
+<p>问题一中从双子峰出发，根据广度优先，则可以有两条路径前进，以此类推，如果走过的路径中存在了金门大桥，则路径存在</p>
+<p>问题二中先查找你的朋友，分别为BOB、CLAIRE、ALICE，如果有分销商则直接返回，没有的话再去朋友的朋友那里去寻找，直到找到位置</p>
+</blockquote>
+<br>
+
+
+        <h3 id="代码实现"   >
+          <a href="#代码实现" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3>
+      <p>在代码实现中需要引入队列概念，队列特性为先进先出，因为这个特性就能很好的代码中模拟出先搜索朋友，再搜索朋友的朋友</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">name</span>):</span><br><span class="line"> 	search_queue = deque()   <span class="comment">#创建队列</span></span><br><span class="line"> 	search_queue += graph[name] <span class="comment">#</span></span><br><span class="line"> 	searched = [] <span class="comment">#搜索过的就放进去</span></span><br><span class="line"> 	<span class="keyword">while</span> search_queue:</span><br><span class="line">		person = search_queue.popleft()</span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">not</span> person <span class="keyword">in</span> searched:</span><br><span class="line">			<span class="keyword">if</span> person_is_seller(person):</span><br><span class="line">				<span class="built_in">print</span> person + <span class="string">&quot; is a mango seller!&quot;</span></span><br><span class="line">				<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				search_queue += graph[person]</span><br><span class="line">				searched.append(person)</span><br><span class="line"> 	<span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line"></span><br><span class="line">最后，你还需编写函数person_is_seller，判断一个人是不是苹果销售商，如下所示。</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">person_is_seller</span>(<span class="params">name</span>):</span><br><span class="line"> 	<span class="keyword">return</span> name[-<span class="number">1</span>] == <span class="string">&#x27;m&#x27;</span> </span><br></pre></td></tr></table></div></figure>
+
+<br>
+
+
+        <h3 id="小结"   >
+          <a href="#小结" class="heading-link"><i class="fas fa-link"></i></a><a href="#小结" class="headerlink" title="小结"></a>小结</h3>
+      <ul>
+<li>广度优先搜索指出是否有从A到B的路径。</li>
+<li>如果有，广度优先搜索将找出最短路径。 </li>
+<li>面临类似于寻找最短路径的问题时，可尝试使用图来建立模型，再使用广度优先搜索来 解决问题。 </li>
+<li>有向图中的边为箭头，箭头的方向指定了关系的方向，例如，rama→adit表示rama欠adit钱。</li>
+<li>无向图中的边不带箭头，其中的关系是双向的，例如，ross - rachel表示“ross与rachel约 会，而rachel也与ross约会”。</li>
+<li>队列是先进先出（FIFO）的。</li>
+<li>栈是后进先出（LIFO）的。</li>
+<li>你需要按加入顺序检查搜索列表中的人，否则找到的就不是最短路径，因此搜索列表必 须是队列。</li>
+<li>对于检查过的人，务必不要再去检查，否则可能导致无限循环。</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/04/21/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">https://supebam.github.io/2022/04/21/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/18/KMP%E7%AE%97%E6%B3%95/"><span class="paginator-prev__text">KMP算法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">
+          介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">
+          作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.</span> <span class="toc-text">
+          例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%E4%BE%8B%E5%9B%BE"><span class="toc-number">3.1.</span> <span class="toc-text">
+          问题一例图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%E4%BE%8B%E5%9B%BE"><span class="toc-number">3.2.</span> <span class="toc-text">
+          问题二例图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">4.</span> <span class="toc-text">
+          问题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">
+          代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">
+          小结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/touxiang.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">“不管什么问题，都必然存在着答案”</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">8</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>supeBam</span></div><div class="busuanzi"></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
