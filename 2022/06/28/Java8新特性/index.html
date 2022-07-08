@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Lambda表达式                           相关介绍       目的：减少代码量 组成Lambda表达式的三要素：形式参数，箭头，代码块Lambda表达式的格式:  格式：(形式参数) -&gt; {代码块} 形式参数：如果有多个参数，参数之间用逗号隔开；如果没有参数，留空即可 -&gt;：由英文中画线和大于符号组成，固定写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java8新特性">
+<meta property="og:url" content="https://supebam.github.io/2022/06/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="supeBam&#96;Blog">
+<meta property="og:description" content="Lambda表达式                           相关介绍       目的：减少代码量 组成Lambda表达式的三要素：形式参数，箭头，代码块Lambda表达式的格式:  格式：(形式参数) -&gt; {代码块} 形式参数：如果有多个参数，参数之间用逗号隔开；如果没有参数，留空即可 -&gt;：由英文中画线和大于符号组成，固定写">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-28T06:08:24.000Z">
+<meta property="article:modified_time" content="2022-06-29T02:14:46.444Z">
+<meta property="article:author" content="supeBam">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary"><title>Java8新特性 | supeBam`Blog</title><link ref="canonical" href="https://supebam.github.io/2022/06/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/life/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">生活</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">supeBam`Blog</div><div class="header-banner-info__subtitle">当你犹豫要不要去做一件事的时候，其实你内心已经有了选择，只是你还没有充足的理由去说服自己</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Java8新特性</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-06-28</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-06-29</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.2k</span></span></div></header><div class="post-body"><span id="more"></span>
+
+
+        <h3 id="Lambda表达式"   >
+          <a href="#Lambda表达式" class="heading-link"><i class="fas fa-link"></i></a><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3>
+      
+        <h4 id="相关介绍"   >
+          <a href="#相关介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#相关介绍" class="headerlink" title="相关介绍"></a>相关介绍</h4>
+      <p><strong>目的：减少代码量</strong></p>
+<p>组成Lambda表达式的三要素：形式参数，箭头，代码块<br><strong>Lambda表达式的格式:</strong></p>
+<ul>
+<li>格式：(形式参数) -&gt; {代码块}</li>
+<li>形式参数：如果有多个参数，参数之间用逗号隔开；如果没有参数，留空即可</li>
+<li>-&gt;：由英文中画线和大于符号组成，固定写法。代表指向动作</li>
+<li>代码块：是我们具体要做的事情，也就是以前我们写的方法体内容</li>
+</ul>
+<p><strong>Lambda表达式的使用前提:</strong></p>
+<ul>
+<li>有一个接口</li>
+<li>接口中有且仅有一个抽象方法</li>
+</ul>
+<p><strong>类型:</strong></p>
+<ul>
+<li>无参无返回值</li>
+<li>有参无返回值</li>
+<li>有参带返回值</li>
+</ul>
+<p><strong>省略规则：</strong></p>
+<ul>
+<li>参数类型可以省略。<strong>但是有多个参数的情况下，不能只省略一个</strong></li>
+<li>如果参数有且仅有一个，那么小括号可以省略</li>
+<li>如果代码块的语句只有一条，可以省略大括号和分号，甚至是return</li>
+</ul>
+<p><strong>lambda表达式和匿名内部类区别:</strong></p>
+<ul>
+<li>匿名内部类：<ul>
+<li>可以是接口，也可以是抽象类，还可以是具体类</li>
+<li>如果接口中多于一个抽象方法，只能使用匿名内部类，而不能使用Lambda表达式</li>
+<li>编译之后，产生一个单独的.class字节码文件</li>
+</ul>
+</li>
+<li>Lambda表达式：<ul>
+<li>只能是接口</li>
+<li>如果接口中有且仅有一个抽象方法，可以使用Lambda表达式，也可以使用匿名内部类</li>
+<li>编译之后，没有一个单独的.class字节码文件。对应的字节码会在运行的时候动态生成</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="初步体验"   >
+          <a href="#初步体验" class="heading-link"><i class="fas fa-link"></i></a><a href="#初步体验" class="headerlink" title="初步体验"></a>初步体验</h4>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lambda初步体验</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LambdaMode1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">LambdaMode1</span> <span class="variable">tester</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LambdaMode1</span>();</span><br><span class="line">        <span class="type">Runnable</span> <span class="variable">r1</span> <span class="operator">=</span> () -&gt; System.out.println(<span class="string">&quot;Hello World 1&quot;</span>);</span><br><span class="line">        r1.run();</span><br><span class="line">        <span class="comment">// 类型声明</span></span><br><span class="line">        <span class="type">MathOperation</span> <span class="variable">addition</span> <span class="operator">=</span> (<span class="type">int</span> a, <span class="type">int</span> b) -&gt; a + b;</span><br><span class="line">        <span class="comment">// 不用类型声明</span></span><br><span class="line">        <span class="type">MathOperation</span> <span class="variable">subtraction</span> <span class="operator">=</span> (a, b) -&gt; a - b;</span><br><span class="line">        <span class="comment">// 大括号中的返回语句</span></span><br><span class="line">        <span class="type">MathOperation</span> <span class="variable">multiplication</span> <span class="operator">=</span> (<span class="type">int</span> a, <span class="type">int</span> b) -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> a * b;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 没有大括号及返回语句</span></span><br><span class="line">        <span class="type">MathOperation</span> <span class="variable">division</span> <span class="operator">=</span> (<span class="type">int</span> a, <span class="type">int</span> b) -&gt; a / b;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;10 + 5 = &quot;</span> + tester.operate(<span class="number">10</span>, <span class="number">5</span>, addition));</span><br><span class="line">        System.out.println(<span class="string">&quot;10 - 5 = &quot;</span> + tester.operate(<span class="number">10</span>, <span class="number">5</span>, subtraction));</span><br><span class="line">        System.out.println(<span class="string">&quot;10 x 5 = &quot;</span> + tester.operate(<span class="number">10</span>, <span class="number">5</span>, multiplication));</span><br><span class="line">        System.out.println(<span class="string">&quot;10 / 5 = &quot;</span> + tester.operate(<span class="number">10</span>, <span class="number">5</span>, division));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不用括号</span></span><br><span class="line">        <span class="type">GreetingService</span> <span class="variable">greetService1</span> <span class="operator">=</span> message -&gt; System.out.println(<span class="string">&quot;Hello &quot;</span> + message);</span><br><span class="line">        <span class="comment">// 用括号</span></span><br><span class="line">        <span class="type">GreetingService</span> <span class="variable">greetService2</span> <span class="operator">=</span> (message) -&gt; System.out.println(<span class="string">&quot;Hello &quot;</span> + message);</span><br><span class="line">        greetService1.sayMessage(<span class="string">&quot;Runoob&quot;</span>);</span><br><span class="line">        greetService2.sayMessage(<span class="string">&quot;Google&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">MathOperation</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="title function_">operation</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">GreetingService</span> &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">sayMessage</span><span class="params">(String message)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">operate</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, MathOperation mathOperation)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> mathOperation.operation(a, b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**测试结果</span></span><br><span class="line"><span class="comment">Hello World 1</span></span><br><span class="line"><span class="comment">10 + 5 = 15</span></span><br><span class="line"><span class="comment">10 - 5 = 5</span></span><br><span class="line"><span class="comment">10 x 5 = 50</span></span><br><span class="line"><span class="comment">10 / 5 = 2</span></span><br><span class="line"><span class="comment">Hello Runoob</span></span><br><span class="line"><span class="comment">Hello Google</span></span><br><span class="line"><span class="comment"></span></span><br></pre></td></tr></table></div></figure>
+
+<br>
+
+
+        <h3 id="Stream流"   >
+          <a href="#Stream流" class="heading-link"><i class="fas fa-link"></i></a><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h3>
+      
+        <h4 id="简单介绍"   >
+          <a href="#简单介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h4>
+      <blockquote>
+<p>流是Java8引入的全新概念，它用来处理集合中的数据，暂且可以把它理解为一种高级集合。 </p>
+<p>众所周知，集合操作非常麻烦，若要对集合进行筛选、投影，需要写大量的代码，而流是以声明的形式操作集 合，它就像SQL语句，我们只需告诉流需要对集合进行什么操作，它就会自动进行操作，并将执行结果交给你， 无需我们自己手写代码。 </p>
+<p>因此，流的集合操作对我们来说是透明的，我们只需向流下达命令，它就会自动把我们想要的结果给我们。由于 操作过程完全由Java处理，因此它可以根据当前硬件环境选择最优的方法处理，我们也无需编写复杂又容易出错 的多线程代码了。 </p>
+</blockquote>
+<p><strong>特点：</strong></p>
+<ul>
+<li>只能遍历一次 （例如：流水线)</li>
+<li>采用内部迭代方式<ul>
+<li>若要对集合进行处理，则需我们手写处理代码，这就叫做外部迭代。 </li>
+<li>而要对流进行处理，我们只需告诉流我们需要什么结果，处理过程由流自行完成，这就称为内部迭代。</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="相关api"   >
+          <a href="#相关api" class="heading-link"><i class="fas fa-link"></i></a><a href="#相关api" class="headerlink" title="相关api"></a>相关api</h4>
+      
+        <h5 id="筛选与切片"   >
+          <a href="#筛选与切片" class="heading-link"><i class="fas fa-link"></i></a><a href="#筛选与切片" class="headerlink" title="筛选与切片"></a>筛选与切片</h5>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">filter(Predicate p)</td>
+<td align="center">接收Lambda表达式，从流中排除某些元素</td>
+</tr>
+<tr>
+<td align="left">distinct()</td>
+<td align="center">筛选，通过流所生成元素的 hashCode() 和 equals() 去 除重复元素</td>
+</tr>
+<tr>
+<td align="left">limit(long  maxSize)</td>
+<td align="center">截断流，使其元素不超过给定数量</td>
+</tr>
+<tr>
+<td align="left">skip(long n)</td>
+<td align="center">跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素 不足 n 个，则返回一个空流。与 limit(n) 互补</td>
+</tr>
+</tbody></table></div>
+
+        <h5 id="映射"   >
+          <a href="#映射" class="heading-link"><i class="fas fa-link"></i></a><a href="#映射" class="headerlink" title="映射"></a>映射</h5>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>map(Function f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元 素上，并将其映射成一个新的元素。</td>
+</tr>
+<tr>
+<td>mapToDouble(ToDoubleFunction     f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元 素上，产生一个新的 DoubleStream。</td>
+</tr>
+<tr>
+<td>mapToInt(ToIntFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元 素上，产生一个新的 IntStream。</td>
+</tr>
+<tr>
+<td>mapToLong(ToLongFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元 素上，产生一个新的 LongStream</td>
+</tr>
+<tr>
+<td>flatMap(Function f)</td>
+<td>接收一个函数作为参数，将流中的每个值都换成另 一个流，然后把所有流连接成一个流</td>
+</tr>
+</tbody></table></div>
+
+        <h5 id="排序"   >
+          <a href="#排序" class="heading-link"><i class="fas fa-link"></i></a><a href="#排序" class="headerlink" title="排序"></a>排序</h5>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sorted()</td>
+<td>产生一个新流，其中按自然顺序排序</td>
+</tr>
+<tr>
+<td>sorted(Comparator comp)</td>
+<td>产生一个新流，其中按比较器顺序排序</td>
+</tr>
+</tbody></table></div>
+
+        <h5 id="匹配"   >
+          <a href="#匹配" class="heading-link"><i class="fas fa-link"></i></a><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h5>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anyMatch (::)</td>
+<td>是否匹配任一元素</td>
+</tr>
+<tr>
+<td>allMatch (::)</td>
+<td>是否匹配所有元素</td>
+</tr>
+<tr>
+<td>noneMatch (::)</td>
+<td>是否未匹配所有元素</td>
+</tr>
+<tr>
+<td>findAny ()</td>
+<td>获取任一元素</td>
+</tr>
+<tr>
+<td>findFirst()</td>
+<td>获取第一个元素</td>
+</tr>
+</tbody></table></div>
+
+        <h5 id="Collector收集"   >
+          <a href="#Collector收集" class="heading-link"><i class="fas fa-link"></i></a><a href="#Collector收集" class="headerlink" title="Collector收集"></a>Collector收集</h5>
+      <p>收集器用来将经过筛选、映射的流进行最后的整理，可以使得最后的结果以不同的形式展现。 </p>
+<ul>
+<li>collect 方法即为收集器，它接收 Collector 接口的实现作为具体收集器的收集方法。 </li>
+<li>Collector 接口提供了很多默认实现的方法，我们可以直接使用它们格式化流的结果；也可以自定义 </li>
+<li>Collector 接口的实现，从而定制自己的收集器。</li>
+</ul>
+<br>
+
+
+        <h3 id="Optional类"   >
+          <a href="#Optional类" class="heading-link"><i class="fas fa-link"></i></a><a href="#Optional类" class="headerlink" title="Optional类"></a>Optional类</h3>
+      <ul>
+<li>为了解决空指针异常更加优雅，Java-8 提供了 Optional 类库。 </li>
+<li>Optional 实际上是个容器：它可以保存类型T的值，或者仅仅保存null。 </li>
+<li>Optional 提供很多有用的方法，这样我们就不用显式进行空值检测</li>
+</ul>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>empty</td>
+<td>返回一个空的 Optional 实例</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>如果值存在并且满足提供的断言， 就返回包含该值的 Optional 对象；否则返回一个空的 Optional 对象</td>
+</tr>
+<tr>
+<td>map</td>
+<td>如果值存在，就对该值执行提供的 mapping 函数调用</td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td>如果值存在，就对该值执行提供的mapping 函数调用，返回一个Optional 类型的值，否则就返回一个空的 Optional 对象</td>
+</tr>
+<tr>
+<td>get</td>
+<td>如果该值存在，将该值用 Optional 封装返回，否则抛出一个NoSuchElementException 异常</td>
+</tr>
+<tr>
+<td>ifPresent</td>
+<td>如果值存在，就执行使用该值的方法调用，否则什么也不做</td>
+</tr>
+<tr>
+<td>isPresent</td>
+<td>如果值存在就返回 true，否则返回false</td>
+</tr>
+<tr>
+<td>of</td>
+<td>将指定值用 Optional 封装之后返回，如果该值为 null，则抛出一个NullPointerException 异常</td>
+</tr>
+<tr>
+<td>ofNullable</td>
+<td>将指定值用 Optional 封装之后返回，如果该值为 null，则返回一个空的Optional 对象</td>
+</tr>
+<tr>
+<td>orElse</td>
+<td>如果有值则将其返回，否则返回一个默认值</td>
+</tr>
+<tr>
+<td>orElseGet</td>
+<td>如果有值则将其返回，否则返回一个由指定的 Supplier 接口生成的值</td>
+</tr>
+<tr>
+<td>orElseThrow</td>
+<td>如果有值则将其返回，否则抛出一个由指定的 Supplier 接口生成的异常</td>
+</tr>
+</tbody></table></div>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//常用</span></span><br><span class="line"><span class="comment">//如果value1不为空则返回value1,为空则返回value2，把创建和判断用链式来表达</span></span><br><span class="line">Optional.ofNullable(value1).orElse(value2);</span><br><span class="line">...</span><br></pre></td></tr></table></div></figure>
+
+<br>
+
+
+        <h3 id="函数式接口"   >
+          <a href="#函数式接口" class="heading-link"><i class="fas fa-link"></i></a><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3>
+      <figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Function&lt;T, R&gt; -T作为输入，返回的R作为输出 </span></span><br><span class="line">Function&lt;String,String&gt; fun = (x) -&gt; &#123;System.out.print(x+<span class="string">&quot;: &quot;</span>);<span class="keyword">return</span> <span class="string">&quot;Function&quot;</span> ;&#125;; System.out.println(fun.apply(<span class="string">&quot;hello world&quot;</span>)); </span><br><span class="line"></span><br><span class="line"><span class="comment">//Predicate&lt;T&gt; -T作为输入，返回的boolean值作为输出 </span></span><br><span class="line">Predicate&lt;String&gt; pre = (x) -&gt;&#123;System.out.print(x);<span class="keyword">return</span> <span class="literal">false</span>;&#125;; System.out.println(<span class="string">&quot;: &quot;</span>+pre.test(<span class="string">&quot;hello World&quot;</span>)); </span><br><span class="line"></span><br><span class="line"><span class="comment">//Consumer&lt;T&gt; - T作为输入，执行某种动作但没有返回值 </span></span><br><span class="line">Consumer&lt;String&gt; con = (x) -&gt; &#123;System.out.println(x);&#125;; </span><br><span class="line">con.accept(<span class="string">&quot;hello world&quot;</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//Supplier&lt;T&gt; - 没有任何输入，返回T </span></span><br><span class="line">Supplier&lt;String&gt; supp = () -&gt; &#123;<span class="keyword">return</span> <span class="string">&quot;Supplier&quot;</span>;&#125;; </span><br><span class="line">System.out.println(supp.get()); </span><br><span class="line"></span><br><span class="line"><span class="comment">//BinaryOperator&lt;T&gt; -两个T作为输入，返回一个T作为输出，对于“reduce”操作很有用 </span></span><br><span class="line">BinaryOperator&lt;String&gt; bina = (x,y) -&gt;&#123;System.out.print(x+<span class="string">&quot; &quot;</span>+y);<span class="keyword">return</span> <span class="string">&quot;Binary Operator&quot;</span>;&#125;; </span><br><span class="line">System.out.println(<span class="string">&quot; &quot;</span>+bina.apply(<span class="string">&quot;hello &quot;</span>,<span class="string">&quot;world&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//自定义函数式</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br></pre></td></tr></table></div></figure>
+
+
+
+<br>
+
+
+        <h3 id="新的日期API"   >
+          <a href="#新的日期API" class="heading-link"><i class="fas fa-link"></i></a><a href="#新的日期API" class="headerlink" title="新的日期API"></a>新的日期API</h3>
+      <p>Java 8中的时区操作被很大程度上简化了，新的时区类 <strong>java.time.ZoneId</strong> 是原有的 java.util.TimeZone 类的替代品</p>
+<p><strong>相关日期时间类:</strong></p>
+<ul>
+<li>Instant </li>
+<li>Clock </li>
+<li>LocalDate</li>
+<li>LocalTime</li>
+<li>LocalDateTime </li>
+<li>ZonedDateTime </li>
+<li>DateTimeFormatter</li>
+<li>Duration</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://supebam.github.io">supeBam</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://supebam.github.io/2022/06/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">https://supebam.github.io/2022/06/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://supebam.github.io/tags/java/">java</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/06/21/%E6%91%A9%E5%B0%94%E6%8A%95%E7%A5%A8%E7%AE%97%E6%B3%95/"><span class="paginator-prev__text">摩尔投票算法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">
+          Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">
+          相关介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">
+          初步体验</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream%E6%B5%81"><span class="toc-number">2.</span> <span class="toc-text">
+          Stream流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">
+          简单介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3api"><span class="toc-number">2.2.</span> <span class="toc-text">
+          相关api</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AD%9B%E9%80%89%E4%B8%8E%E5%88%87%E7%89%87"><span class="toc-number">2.2.1.</span> <span class="toc-text">
+          筛选与切片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%98%A0%E5%B0%84"><span class="toc-number">2.2.2.</span> <span class="toc-text">
+          映射</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">2.2.3.</span> <span class="toc-text">
+          排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D"><span class="toc-number">2.2.4.</span> <span class="toc-text">
+          匹配</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Collector%E6%94%B6%E9%9B%86"><span class="toc-number">2.2.5.</span> <span class="toc-text">
+          Collector收集</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">
+          Optional类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">4.</span> <span class="toc-text">
+          函数式接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9FAPI"><span class="toc-number">5.</span> <span class="toc-text">
+          新的日期API</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/touxiang.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">“不管什么问题，都必然存在着答案”</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">11</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>supeBam</span></div><div class="busuanzi"></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
